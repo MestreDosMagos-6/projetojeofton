@@ -1,22 +1,23 @@
-<!-- <?php
+<?php
+    include_once('conexao.php');
 
     if(isse($_POST['submit']))
     {
-        // print_r('Nome:' . $_POST['nome']);
-        // print_r('<br>');
-        // print_r('Email:' . $_POST['email']);
-        // print_r('<br>');
-        // print_r('Telefone:' . $_POST['telefone']);
-        // print_r('<br>');
-        // print_r('Sexo:' . $_POST['genero']);
-        // print_r('<br>');
-        // print_r('Data de Nascimeto:' . $_POST['data_nascimento']);
-        // print_r('<br>');
-        // print_r('Cidade:' . $_POST['cidade']);
-        // print_r('<br>');
-        // print_r('Estado:' . $_POST['estado']);
-        // print_r('<br>');
-        // print_r('Endereço:' . $_POST['endereco']);
+         // print_r('Nome:' . $_POST['nome']);
+         // print_r('<br>');
+         // print_r('Email:' . $_POST['email']);
+         // print_r('<br>');
+         // print_r('Telefone:' . $_POST['telefone']);
+         // print_r('<br>');
+         // print_r('Sexo:' . $_POST['genero']);
+         // print_r('<br>');
+         // print_r('Data de Nascimeto:' . $_POST['data_nascimento']);
+         // print_r('<br>');
+         // print_r('Cidade:' . $_POST['cidade']);
+         // print_r('<br>');
+         // print_r('Estado:' . $_POST['estado']);
+         // print_r('<br>');
+         // print_r('Endereço:' . $_POST['endereco']);
 
         include_once('menu.php');
 
@@ -33,7 +34,8 @@
         VALUES('$nome', '$email', '$telefone', '$sexo', '$data_nasc', '$cidade', '$estado', '$endereco')");
 
     }
-?> -->
+     ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
