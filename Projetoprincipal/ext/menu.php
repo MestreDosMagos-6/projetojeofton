@@ -1,4 +1,4 @@
-<?
+<?php
 
     $dbHost = 'Localhost';
     $dbUsername = 'root';
@@ -7,12 +7,12 @@
 
     $conexao = new mysqli($dbHost,$dbUsername,$dbPassword,$dbName);
 
-    // if($conexao->connect_erro)
-    // {
-    //   echo"Erro";
-    // }
-    // else
-    // {
-    //   echo "conexão efetuada com sucesso";
-    // }
+     if($conexao->connect_erro)
+     {
+       echo"Erro";
+     }
+     else
+     {
+       echo "conexão efetuada com sucesso";
+     }
 ?>
