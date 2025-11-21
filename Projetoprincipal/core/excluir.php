@@ -1,27 +1,17 @@
 <?php
+    include_once('conexao.php');
 
-try {
-    $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName;charset=utf8", $dbUsername, $dbPassword);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-    die("Erro na conexão: " . $e->getMessage());
-}
+    $id = $_GET['id'] ?? null;
 
-$id = $_GET['id'] ?? null;
-
-if ($id) {
-    try {
+    if ($id) {
         $sql = "DELETE FROM usuarios WHERE id = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$id]);
+        $stmt = $conexao->prepare($sql);
+        $stmt->bind_param("i", $id);
         
-        header('Location: formulario.php?deleted=true');
-        exit;
-    } catch(PDOException $e) {
-        die("Erro ao excluir usuário: " . $e->getMessage());
+        if($stmt->execute()){
+             header('Location: sistema.php');
+        } else {
+             die("Erro ao excluir: " . $conexao->error);
+        }
     }
-} else {
-    header('Location: formulario.php');
-    exit;
-}
 ?>
