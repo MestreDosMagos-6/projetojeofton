@@ -1,73 +1,80 @@
 <?php
-    include_once('conexao.php');
+include_once('conexao.php');
 
-    if(isset($_POST['submit']))
-    {
-        $nome = $_POST['nome'];
-        $email = $_POST['email'];
-        $telefone = $_POST['telefone'];
-        $sexo =  $_POST['genero'];
-        $data_nasc = $_POST['data_nascimento'];
-        $cidade = $_POST['cidade'];
-        $estado = $_POST['estado'];
-        $endereco = $_POST['endereco'];
+if (isset($_POST['submit'])) {
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $telefone = $_POST['telefone'];
+    $sexo =  $_POST['genero'];
+    $data_nasc = $_POST['data_nascimento'];
+    $cidade = $_POST['cidade'];
+    $estado = $_POST['estado'];
+    $endereco = $_POST['endereco'];
 
-        // LÓGICA SEGURA (Prepared Statement)
-        // Isso evita erros de sintaxe com aspas e protege o banco
-        $sql = "INSERT INTO usuarios(nome, email, telefone, sexo, data_nascimento, cidade, estado, endereco) 
+    // LÓGICA SEGURA (Prepared Statement)
+    $sql = "INSERT INTO usuarios(nome, email, telefone, sexo, data_nascimento, cidade, estado, endereco) 
                 VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-        
-        $stmt = $conexao->prepare($sql);
-        $stmt->bind_param("ssssssss", $nome, $email, $telefone, $sexo, $data_nasc, $cidade, $estado, $endereco);
 
-        if($stmt->execute()) {
-            // Sucesso: Avisa e volta para a tabela
-            echo "<script>
+    $stmt = $conexao->prepare($sql);
+    $stmt->bind_param("ssssssss", $nome, $email, $telefone, $sexo, $data_nasc, $cidade, $estado, $endereco);
+
+    if ($stmt->execute()) {
+
+        echo "<script>
                 alert('Usuário cadastrado com sucesso!');
                 window.location.href = 'sistema.php';
             </script>";
-        } else {
-            echo "Erro ao cadastrar: " . $stmt->error;
-        }
-        
-        $stmt->close();
+    } else {
+        echo "Erro ao cadastrar: " . $stmt->error;
     }
+
+    $stmt->close();
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Cliente</title>
     <style>
-        /* Mantendo o estilo visual consistente */
-        body{
+        body {
             font-family: Arial, Helvetica, sans-serif;
-            background-image: linear-gradient(to right, rgb(20,147,220), rgb(17,54,71));
+            background-image: linear-gradient(to right, rgb(20, 147, 220), rgb(17, 54, 71));
         }
-        .box{
+
+        .box {
             color: white;
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
             background-color: rgba(0, 0, 0, 0.6);
             padding: 15px;
             border-radius: 15px;
             width: 20%;
             min-width: 300px;
         }
-        fieldset{ border: 3px solid dodgerblue; }
-        legend{
+
+        fieldset {
+            border: 3px solid dodgerblue;
+        }
+
+        legend {
             border: 1px solid dodgerblue;
             padding: 10px;
             text-align: center;
             background-color: dodgerblue;
             border-radius: 8px;
         }
-        .inputBox{ position: relative; }
-        .inputUser{
+
+        .inputBox {
+            position: relative;
+        }
+
+        .inputUser {
             background: none;
             border: none;
             border-bottom: 1px solid white;
@@ -77,28 +84,32 @@
             width: 100%;
             letter-spacing: 2px;
         }
-        .labelInput{
+
+        .labelInput {
             position: absolute;
             top: 0px;
             left: 0px;
             pointer-events: none;
             transition: .5s;
         }
-        .inputUser:focus ~ .labelInput,
-        .inputUser:valid ~ .labelInput{
+
+        .inputUser:focus~.labelInput,
+        .inputUser:valid~.labelInput {
             top: -20px;
             font-size: 12px;
             color: dodgerblue;
         }
-        #data_nascimento{
+
+        #data_nascimento {
             border: none;
             padding: 8px;
             border-radius: 10px;
             outline: none;
             font-size: 15px;
         }
-        #submit{
-            background-image: linear-gradient(to right, rgb(0,92, 197), rgb(90, 20, 220));
+
+        #submit {
+            background-image: linear-gradient(to right, rgb(0, 92, 197), rgb(90, 20, 220));
             width: 100%;
             border: none;
             padding: 15px;
@@ -107,9 +118,11 @@
             cursor: pointer;
             border-radius: 10px;
         }
-        #submit:hover{
-            background-image: linear-gradient(to right, rgb(0,80, 172), rgb(80, 19, 195));
+
+        #submit:hover {
+            background-image: linear-gradient(to right, rgb(0, 80, 172), rgb(80, 19, 195));
         }
+
         .btn-voltar {
             color: white;
             text-decoration: none;
@@ -119,6 +132,7 @@
         }
     </style>
 </head>
+
 <body>
     <a href="sistema.php" class="btn-voltar">← Voltar para o Sistema</a>
 
@@ -129,17 +143,17 @@
                 <br>
                 <div class="inputBox">
                     <input type="text" name="nome" id="nome" class="inputUser" required>
-                    <label for="nome" class="labelInput">Nome completo</label> 
+                    <label for="nome" class="labelInput">Nome completo</label>
                 </div>
                 <br><br>
                 <div class="inputBox">
                     <input type="text" name="email" id="email" class="inputUser" required>
-                    <label for="email" class="labelInput">Email</label> 
+                    <label for="email" class="labelInput">Email</label>
                 </div>
                 <br><br>
                 <div class="inputBox">
                     <input type="tel" name="telefone" id="telefone" class="inputUser" required>
-                    <label for="telefone" class="labelInput">Telefone</label> 
+                    <label for="telefone" class="labelInput">Telefone</label>
                 </div>
                 <p>Sexo:</p>
                 <input type="radio" id="feminino" name="genero" value="feminino" required>
@@ -151,22 +165,22 @@
                 <input type="radio" id="outro" name="genero" value="outro" required>
                 <label for="outro">Outro</label>
                 <br><br>
-                <label for="data_nascimento"><b>Data de Nascimento:</b></label> 
+                <label for="data_nascimento"><b>Data de Nascimento:</b></label>
                 <input type="date" name="data_nascimento" id="data_nascimento" required>
                 <br><br><br>
                 <div class="inputBox">
                     <input type="text" name="cidade" id="cidade" class="inputUser" required>
-                    <label for="cidade" class="labelInput"><b>Cidade</b></label> 
+                    <label for="cidade" class="labelInput"><b>Cidade</b></label>
                 </div>
                 <br><br>
                 <div class="inputBox">
-                     <input type="text" name="estado" id="estado" class="inputUser" required>
-                     <label for="estado" class="labelInput"><b>Estado</b></label> 
+                    <input type="text" name="estado" id="estado" class="inputUser" required>
+                    <label for="estado" class="labelInput"><b>Estado</b></label>
                 </div>
                 <br><br>
                 <div class="inputBox">
-                     <input type="text" name="endereco" id="endereco" class="inputUser" required>
-                     <label for="endereco" class="labelInput"><b>Endereço</b></label>
+                    <input type="text" name="endereco" id="endereco" class="inputUser" required>
+                    <label for="endereco" class="labelInput"><b>Endereço</b></label>
                 </div>
                 <br><br>
                 <input type="submit" name="submit" id="submit" value="Cadastrar">
@@ -174,4 +188,5 @@
         </form>
     </div>
 </body>
+
 </html>

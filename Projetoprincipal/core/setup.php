@@ -35,4 +35,3 @@ if ($conexao->query($tabela) === TRUE) {
 }
 
 $conexao->close();
-?>
